@@ -10,8 +10,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener{
+public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener{
     CheckBox checkSelect;
     RadioGroup rg;
     RadioButton radio_cat, radio_dog, radio_gosum;
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         butOk=(Button) findViewById(R.id.but_ok);
         imgvPet=(ImageView) findViewById(R.id.imgv_pet);
         checkSelect.setOnCheckedChangeListener(this);
-    }
+        butOk.setOnClickListener(this);
+    }//end onCreate
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -46,6 +48,23 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             rg.setVisibility(View.INVISIBLE);
             butOk.setVisibility(View.INVISIBLE);
             imgvPet.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (rg.getCheckedRadioButtonId()){
+            case R.id.radio_dog:
+                imgvPet.setImageResource(R.drawable.huski);
+                break;
+            case R.id.radio_cat:
+                imgvPet.setImageResource(R.drawable.pold);
+                break;
+            case R.id.radio_gosum:
+                imgvPet.setImageResource(R.drawable.gosum);
+                break;
+            default:
+                Toast.makeText(this, "라디오 버튼이 선택이 안 되었습니다.",Toast.LENGTH_SHORT).show();
         }
     }
 }
